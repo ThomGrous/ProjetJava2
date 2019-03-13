@@ -73,15 +73,15 @@ public class HomeScreenController {
 		else {
 			formPane.setVisible(true);
 			currentPerson = person;
-			/*
-			questionField.setText(currentQuestion.getQuestion());
-			answer1Field.setText(currentQuestion.getAnswer1().getText());
-			answer2Field.setText(currentQuestion.getAnswer2().getText());
-			answer3Field.setText(currentQuestion.getAnswer3().getText());
-			radio1.setSelected(currentQuestion.getAnswer1().isGoodAnswer());
-			radio2.setSelected(currentQuestion.getAnswer2().isGoodAnswer());
-			radio3.setSelected(currentQuestion.getAnswer3().isGoodAnswer());
-			*/
+			
+			lastNameField.setText(currentPerson.getLastName());
+			firstNameField.setText(currentPerson.getFirstName());
+			nickNameField.setText(currentPerson.getNickName());
+			adressField.setText(currentPerson.getAddress());
+			emailField.setText(currentPerson.getEmailAddress());
+			phoneNumberField.setText(currentPerson.getPhoneNumber());
+			birthDateField.setText(currentPerson.getBirthDate().toString()); // a voir la tete que ca a
+			
 		}
 	}
 	

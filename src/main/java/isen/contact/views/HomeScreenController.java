@@ -100,8 +100,18 @@ public class HomeScreenController {
     @FXML
     private void handleSaveButton() {
     	
+    	currentPerson.setAddress(adressField.getText());
+    	//currentPerson.setBirthDate(birthDateField.getText()); //probleme ici
+    	currentPerson.setEmailAddress(emailField.getText());
+    	currentPerson.setFirstName(firstNameField.getText());
+    	currentPerson.setLastName(lastNameField.getText());
+    	currentPerson.setNickName(nickNameField.getText());
+    	currentPerson.setPhoneNumber(phoneNumberField.getText());
+    	
+    	personListService.updatePerson(currentPerson);
     	
     	resetView();
+    	
     	
     	
     	

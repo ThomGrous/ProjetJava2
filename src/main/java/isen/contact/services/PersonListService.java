@@ -36,5 +36,8 @@ public class PersonListService {
 		dao.deletePerson(person);
 	}
 	
+	public void updatePerson(Person person) {
+		dao.updatePerson(person);
+	}
 
 }

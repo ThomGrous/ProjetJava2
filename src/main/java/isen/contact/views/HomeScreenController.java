@@ -100,6 +100,17 @@ public class HomeScreenController {
     @FXML
     private void handleSaveButton() {
     	
+    	
+    	resetView();
+    	
+    	
+    	
+    }
+
+
+    @FXML
+    private void handleNewButton() {
+    	
     	currentPerson.setAddress(adressField.getText());
     	//currentPerson.setBirthDate(birthDateField.getText()); //probleme ici
     	currentPerson.setEmailAddress(emailField.getText());
@@ -112,18 +123,12 @@ public class HomeScreenController {
     	
     	resetView();
     	
-    	
-    	
-    }
-
-
-    @FXML
-    private void handleNewButton() {
-    }
+   }
 
 
     @FXML
     private void handleDeleteButton() {
+    	personListService.delPerson(currentPerson);
     }
 	
 	

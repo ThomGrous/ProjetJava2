@@ -45,6 +45,8 @@ public class HomeScreenController {
 		personsTable.refresh();
 		personsTable.getSelectionModel().clearSelection();
 	}
+	
+	@FXML
 	private void populateList() {
 		personsTable.setItems(personListService.getPersons());
 		refreshList();
@@ -97,11 +99,16 @@ public class HomeScreenController {
 	
     @FXML
     private void handleSaveButton() {
-    	//currentPerson =
-    			/*new Question(questionField.getText(), 
-    			new Answer(answer1Field.getText(), radio1.isSelected()), 
-    			new Answer(answer2Field.getText(), radio2.isSelected()), 
-    			new Answer(answer3Field.getText(), radio3.isSelected())  );*/
+    	
+    	currentPerson.setAddress(adressField.getText());
+    	//currentPerson.setBirthDate(birthDateField.getText()); //probleme ici
+    	currentPerson.setEmailAddress(emailField.getText());
+    	currentPerson.setFirstName(firstNameField.getText());
+    	currentPerson.setLastName(lastNameField.getText());
+    	currentPerson.setNickName(nickNameField.getText());
+    	currentPerson.setPhoneNumber(phoneNumberField.getText());
+    	
+    	personListService.addPerson(currentPerson);
     	
     	resetView();
     	

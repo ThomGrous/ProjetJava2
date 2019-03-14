@@ -12,10 +12,23 @@ public class Person {
 	private String emailAddress;
 	private LocalDate birthDate;
 	
-	
+
 	public Person(String lastName, String firstName, String nickName, String phoneNumber, String address,
 			String emailAddress, LocalDate birthDate) {
 		super();
+		this.lastName = lastName;
+		this.firstName = firstName;
+		this.nickName = nickName;
+		this.phoneNumber = phoneNumber;
+		this.address = address;
+		this.emailAddress = emailAddress;
+		this.birthDate = birthDate;
+	}
+	
+	public Person(int id, String lastName, String firstName, String nickName, String phoneNumber, String address,
+			String emailAddress, LocalDate birthDate) {
+		super();
+		this.id = id;
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.nickName = nickName;

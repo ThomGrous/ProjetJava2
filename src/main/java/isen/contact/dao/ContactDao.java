@@ -20,6 +20,7 @@ public class ContactDao {
 				 try (ResultSet results = statement.executeQuery("SELECT * from person")) {
 					 while (results.next()) {
 						 Person person = new Person(
+								 results.getInt("idperson"),
 								 results.getString("lastname"),
 								 results.getString("firstname"),
 								 results.getString("nickname"),
@@ -27,7 +28,6 @@ public class ContactDao {
 								 results.getString("address"),
 								 results.getString("email_address"),
 								 results.getDate("birth_date").toLocalDate());
-						 person.setId(results.getInt("idperson"));
 						 list.add(person);
 					 }
 				 }

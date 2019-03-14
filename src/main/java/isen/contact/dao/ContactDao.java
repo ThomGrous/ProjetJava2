@@ -20,7 +20,6 @@ public class ContactDao {
 				 try (ResultSet results = statement.executeQuery("SELECT * from person")) {
 					 while (results.next()) {
 						 Person person = new Person(
-								 results.getInt("idperson"),
 								 results.getString("lastname"),
 								 results.getString("firstname"),
 								 results.getString("nickname"),
@@ -28,6 +27,7 @@ public class ContactDao {
 								 results.getString("address"),
 								 results.getString("email_address"),
 								 results.getDate("birth_date").toLocalDate());
+						 person.setId(results.getInt("idperson"));
 						 list.add(person);
 					 }
 				 }
@@ -39,7 +39,7 @@ public class ContactDao {
 		return list;
 	}
 	
-	public void addPerson(Person personToAdd) {
+	public Person addPerson(Person personToAdd) {
 		try (Connection connection = DataSourceFactory.getDataSource().getConnection()) {
 			 String sqlQuery = "insert into person(lastname,firstname,nickname,phone_number,address,email_address,"
 			 		+ "birth_date) VALUES(?,?,?,?,?,?,?)";
@@ -52,6 +52,11 @@ public class ContactDao {
 				 statement.setString(6, personToAdd.getEmailAddress());
 				 statement.setDate(7, Date.valueOf(personToAdd.getBirthDate()));
 				 statement.executeUpdate();
+				 ResultSet ids = statement.getGeneratedKeys();
+				 if (ids.next()) {
+					 personToAdd.setId(ids.getInt(1));
+					 return personToAdd;
+				 }
 				 statement.close();
 
 			 }
@@ -59,6 +64,7 @@ public class ContactDao {
 		// Manage Exception
 		e.printStackTrace();
 		}
+		return null;
 	}
 	
 	public void deletePerson(Person personToDelete) {
@@ -75,8 +81,8 @@ public class ContactDao {
 
 	}
 	
-	public void updatePerson(Person personToUpdate) {
+	public Person updatePerson(Person personToUpdate) {
 		this.deletePerson(personToUpdate);
-		this.addPerson(personToUpdate);
+		 return this.addPerson(personToUpdate);
 	}
 }

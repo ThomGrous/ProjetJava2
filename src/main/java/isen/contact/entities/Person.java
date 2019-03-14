@@ -13,10 +13,9 @@ public class Person {
 	private LocalDate birthDate;
 	
 	
-	public Person(int id, String lastName, String firstName, String nickName, String phoneNumber, String address,
+	public Person(String lastName, String firstName, String nickName, String phoneNumber, String address,
 			String emailAddress, LocalDate birthDate) {
 		super();
-		this.id = id;
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.nickName = nickName;

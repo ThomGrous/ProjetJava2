@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import isen.contact.backup.Backup;
 import isen.contact.entities.Person;
 
 public class ContactDao {
@@ -85,4 +86,25 @@ public class ContactDao {
 		this.deletePerson(personToUpdate);
 		return this.addPerson(personToUpdate);
 	}
+	
+	/**
+	 * path coder en dur dans backup.importDao
+	 * 
+	 * (Methode de pharmacien-plombier)
+	 * @return
+	 */
+	public List<Person> updateDatabase(){
+		Backup backup = new Backup();
+		List<Person> newDb = backup.importDAO();
+		List<Person> oldDb = this.listAllPersonsInDAO();
+		for(Person person : oldDb) {
+			this.deletePerson(person);
+		}
+		for(Person person : newDb) {
+			this.addPerson(person);
+		}
+		return newDb;
+	}
+	
+	
 }

@@ -161,15 +161,11 @@ public class HomeScreenController {
     @FXML
     private void handleImportButton() {
 
-    	System.out.println("Import"); // debug
-    	/*********************************************************/
-
     	ContactDao dao = new ContactDao();
-    	Backup bp = new Backup();
-    	bp.importDAO();
     	
-    	/*********************************************************/
+    	System.out.println("Import"); // debug
     	
+    	dao.updateDatabase();
     	
     	
     	

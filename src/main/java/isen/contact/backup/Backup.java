@@ -36,6 +36,7 @@ public class Backup {
 				bufferedWriter.write("LastName;"+contact.getLastName()+"\n");
 				bufferedWriter.write("FirstName;"+contact.getFirstName()+"\n");
 				bufferedWriter.write("PhoneNumber;"+contact.getPhoneNumber()+"\n");
+				bufferedWriter.write("NickName;" + contact.getNickName()+"\n");
 				bufferedWriter.write("Address;"+contact.getAddress()+"\n");
 				bufferedWriter.write("EmailAddress;"+contact.getEmailAddress()+"\n");
 				bufferedWriter.write("BirthDate;"+contact.getBirthDate()+"\n");

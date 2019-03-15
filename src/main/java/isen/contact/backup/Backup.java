@@ -23,7 +23,7 @@ public class Backup {
 	
 	public void exportDAO(List<Person> database) {
 		try{
-			OutputStream outputStream = new FileOutputStream("ProjetJava2-master/src/main/resources/person.vcard");
+			OutputStream outputStream = new FileOutputStream("./src/main/resources/export-person.vcard"); //path output
 			Writer writer = new OutputStreamWriter(outputStream, "UTF-8");
 			BufferedWriter bufferedWriter = new BufferedWriter(writer);
 			
@@ -50,10 +50,10 @@ public class Backup {
 	}
 	
 	
-	public List<Person> importDAO(Path backupFilePath){
+	public List<Person> importDAO(){
 		List<Person> list = new ArrayList<>();
 		try {
-			InputStream inputStream = new FileInputStream("ProjetJava2-master/src/main/resources/person.vcard");
+			InputStream inputStream = new FileInputStream("./src/main/resources/person.vcard");
 			Reader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
 			BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 			String line;

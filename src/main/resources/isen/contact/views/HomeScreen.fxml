@@ -46,8 +46,8 @@
                         <Label alignment="TOP_LEFT" layoutX="165.0" layoutY="197.0" text="Birth Date" />
                         <TextField fx:id="monthField" layoutX="202.0" layoutY="217.0" prefHeight="31.0" prefWidth="30.0" />
                         <TextField fx:id="yearField" layoutX="240.0" layoutY="218.0" prefHeight="31.0" prefWidth="30.0" />
-                        <Button layoutX="104.0" layoutY="307.0" mnemonicParsing="false" text="Export" />
-                        <Button layoutX="166.0" layoutY="307.0" mnemonicParsing="false" text="Import" />
+                        <Button layoutX="104.0" layoutY="307.0" mnemonicParsing="false" onAction="#handleExportButton" text="Export" />
+                        <Button layoutX="166.0" layoutY="307.0" mnemonicParsing="false" onAction="#handleImportButton" text="Import" />
                      </children>
                   </AnchorPane>
                   <Button layoutX="219.0" layoutY="296.0" mnemonicParsing="false" onAction="#handleNewButton" text="New" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />

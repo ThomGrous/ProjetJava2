@@ -1,7 +1,10 @@
 package isen.contact.views;
 
+import java.nio.file.Paths;
 import java.time.LocalDate;
 
+import isen.contact.backup.Backup;
+import isen.contact.dao.ContactDao;
 import isen.contact.entities.Person;
 import isen.contact.services.PersonListService;
 import isen.contact.util.PersonChangeListener;
@@ -155,12 +158,42 @@ public class HomeScreenController {
     	
    }
 
+    @FXML
+    private void handleImportButton() {
+
+    	System.out.println("Import"); // debug
+    	/*********************************************************/
+
+    	ContactDao dao = new ContactDao();
+    	Backup bp = new Backup();
+    	bp.importDAO();
+    	
+    	/*********************************************************/
+    	
+    	
+    	
+    	
+    	resetView();
+    }
+    
+    @FXML
+    private void handleExportButton() {
+
+    	System.out.println("Export"); //debug
+    	
+    	Backup bp = new Backup();
+    	ContactDao dao = new ContactDao();
+    	bp.exportDAO(dao.listAllPersonsInDAO());
+    	resetView();
+    }
 
     @FXML
     private void handleDeleteButton() {
     	personListService.delPerson(currentPerson);
     	resetView();
     }
+    
+
 	
 	
 }

@@ -27,20 +27,20 @@ public class Backup {
 			Writer writer = new OutputStreamWriter(outputStream, "UTF-8");
 			BufferedWriter bufferedWriter = new BufferedWriter(writer);
 			
-			bufferedWriter.write("BEGIN:VCARD");
-			bufferedWriter.write("VERSION:2.1");
+			bufferedWriter.write("BEGIN:VCARD"+"\n");
+			bufferedWriter.write("VERSION:2.1"+"\n");
 			
 			for(Person contact : database) {
 				String id=String.valueOf(contact.getId());
-				bufferedWriter.write("ID;"+id);
-				bufferedWriter.write("LastName;"+contact.getLastName());
-				bufferedWriter.write("FirstName;"+contact.getFirstName());
-				bufferedWriter.write("PhoneNumber;"+contact.getPhoneNumber());
-				bufferedWriter.write("Address;"+contact.getAddress());
-				bufferedWriter.write("EmailAddress;"+contact.getEmailAddress());
-				bufferedWriter.write("BirthDate;"+contact.getBirthDate());
+				bufferedWriter.write("ID;"+id +"\n");
+				bufferedWriter.write("LastName;"+contact.getLastName()+"\n");
+				bufferedWriter.write("FirstName;"+contact.getFirstName()+"\n");
+				bufferedWriter.write("PhoneNumber;"+contact.getPhoneNumber()+"\n");
+				bufferedWriter.write("Address;"+contact.getAddress()+"\n");
+				bufferedWriter.write("EmailAddress;"+contact.getEmailAddress()+"\n");
+				bufferedWriter.write("BirthDate;"+contact.getBirthDate()+"\n");
 			}
-			bufferedWriter.write("END:VCARD");
+			bufferedWriter.write("END:VCARD"+"\n");
 			bufferedWriter.flush();
 			
 			writer.close();
@@ -63,8 +63,10 @@ public class Backup {
 				System.out.println(line);
 				
 				switch(line.charAt(0)) {
-					case 'I': if(contact.getId()!=0) {
+					case 'I': 
+						if(contact.getId()!=0) {
 									list.add(contact);
+									contact.setId(0);
 									contact.setLastName(vide.getLastName());
 									contact.setFirstName(vide.getFirstName());
 									contact.setNickName(vide.getNickName());
@@ -73,37 +75,57 @@ public class Backup {
 									contact.setEmailAddress(vide.getEmailAddress());
 									contact.setBirthDate(vide.getBirthDate());
 									}
+							if(line.charAt(1) == 'D') {
+								String[] data = line.split(";");
+								contact.setId(Integer.parseInt(data[1]));
+							}
+							break;
 					
-					case 'L': if(line.charAt(1)=='a') {
-						String[] data = line.split(";");
-						contact.setLastName(data[1]);
+					case 'L': 
+						if(line.charAt(1)=='a') {
+							String[] data = line.split(";");
+							contact.setLastName(data[1]);
 						}
-					case 'F': if(line.charAt(1)=='i') {
+						break;
+					case 'F': 
+						if(line.charAt(1)=='i') {
 						String[] data = line.split(";");
 						contact.setFirstName(data[1]);
 						}
-					case 'N': if(line.charAt(1)=='i') {
+						break;
+					case 'N': 
+						if(line.charAt(1)=='i') {
 						String[] data = line.split(";");
 						contact.setNickName(data[1]);
 					}
-					case 'P': if(line.charAt(1)=='h') {
+						break;
+					case 'P': 
+						if(line.charAt(1)=='h') {
 						String[] data = line.split(";");
 						contact.setPhoneNumber(data[1]);
 					}
-					case 'A': if(line.charAt(1)=='d') {
+						break;
+					case 'A': 
+						if(line.charAt(1)=='d') {
 						String[] data = line.split(";");
 						contact.setAddress(data[1]);
 					}
-					case 'E': if(line.charAt(1)=='m') {
+						break;
+					case 'E': 
+						if(line.charAt(1)=='m') {
 						String[] data = line.split(";");
 						contact.setEmailAddress(data[1]);
 					}
-					case 'B': if(line.charAt(1)=='i') {
+						break;
+					case 'B': 
+						if(line.charAt(1)=='i') {
+						System.out.println("je veux une date ici bande de shlag :" + line);
 						String[] data = line.split(";");
-						DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+						DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d");
 						LocalDate localDate = LocalDate.parse(data[1], formatter);
 						contact.setBirthDate(localDate);
 					}
+						break;
 					default: break;
 				}
 				

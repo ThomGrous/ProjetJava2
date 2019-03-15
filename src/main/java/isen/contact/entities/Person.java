@@ -11,11 +11,12 @@ public class Person {
 	private String address;
 	private String emailAddress;
 	private LocalDate birthDate;
-	
 
-	public Person(String lastName, String firstName, String nickName, String phoneNumber, String address,
+	
+	public Person(int id, String lastName, String firstName, String nickName, String phoneNumber, String address,
 			String emailAddress, LocalDate birthDate) {
 		super();
+		this.id = id;
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.nickName = nickName;
@@ -25,10 +26,9 @@ public class Person {
 		this.birthDate = birthDate;
 	}
 	
-	public Person(int id, String lastName, String firstName, String nickName, String phoneNumber, String address,
+	public Person(String lastName, String firstName, String nickName, String phoneNumber, String address,
 			String emailAddress, LocalDate birthDate) {
 		super();
-		this.id = id;
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.nickName = nickName;

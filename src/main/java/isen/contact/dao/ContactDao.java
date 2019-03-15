@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import isen.contact.backup.Backup;
 import isen.contact.entities.Person;
 
 public class ContactDao {
@@ -52,11 +53,11 @@ public class ContactDao {
 				 statement.setString(6, personToAdd.getEmailAddress());
 				 statement.setDate(7, Date.valueOf(personToAdd.getBirthDate()));
 				 statement.executeUpdate();
-				 ResultSet ids = statement.getGeneratedKeys();
-				 if (ids.next()) {
-					 personToAdd.setId(ids.getInt(1));
-					 return personToAdd;
-				 }
+				 ResultSet ids = statement.getGeneratedKeys(); 
+				 if (ids.next()) { 
+					 personToAdd.setId(ids.getInt(1)); 
+					 return personToAdd; 
+				 } 
 				 statement.close();
 
 			 }
@@ -83,6 +84,27 @@ public class ContactDao {
 	
 	public Person updatePerson(Person personToUpdate) {
 		this.deletePerson(personToUpdate);
-		 return this.addPerson(personToUpdate);
+		return this.addPerson(personToUpdate);
 	}
+	
+	/**
+	 * path coder en dur dans backup.importDao
+	 * 
+	 * (Methode de pharmacien-plombier)
+	 * @return
+	 */
+	public List<Person> updateDatabase(){
+		Backup backup = new Backup();
+		List<Person> newDb = backup.importDAO();
+		List<Person> oldDb = this.listAllPersonsInDAO();
+		for(Person person : oldDb) {
+			this.deletePerson(person);
+		}
+		for(Person person : newDb) {
+			this.addPerson(person);
+		}
+		return newDb;
+	}
+	
+	
 }

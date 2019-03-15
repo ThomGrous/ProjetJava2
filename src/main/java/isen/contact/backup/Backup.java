@@ -120,7 +120,7 @@ public class Backup {
 						break;
 					case 'B': 
 						if(line.charAt(1)=='i') {
-						System.out.println("je veux une date ici bande de shlag :" + line);
+						System.out.println("je veux une date ici :" + line);
 						String[] data = line.split(";");
 						DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d");
 						LocalDate localDate = LocalDate.parse(data[1], formatter);

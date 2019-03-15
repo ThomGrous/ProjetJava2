@@ -42,8 +42,10 @@
                         <Label alignment="TOP_LEFT" layoutX="14.0" layoutY="197.0" text="EMail" />
                         <TextField fx:id="phoneNumberField" layoutX="166.0" layoutY="91.0" prefHeight="31.0" prefWidth="147.0" />
                         <Label alignment="TOP_LEFT" layoutX="166.0" layoutY="70.0" text="Phone Number" />
-                        <TextField fx:id="birthdateField" layoutX="165.0" layoutY="218.0" prefHeight="31.0" prefWidth="147.0" />
+                        <TextField fx:id="dayField" layoutX="165.0" layoutY="218.0" prefHeight="31.0" prefWidth="30.0" />
                         <Label alignment="TOP_LEFT" layoutX="165.0" layoutY="197.0" text="Birth Date" />
+                        <TextField fx:id="monthField" layoutX="202.0" layoutY="217.0" prefHeight="31.0" prefWidth="30.0" />
+                        <TextField fx:id="yearField" layoutX="240.0" layoutY="218.0" prefHeight="31.0" prefWidth="30.0" />
                      </children>
                   </AnchorPane>
                   <Button layoutX="219.0" layoutY="296.0" mnemonicParsing="false" onAction="#handleNewButton" text="New" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />

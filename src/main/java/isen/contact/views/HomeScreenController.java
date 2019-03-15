@@ -1,5 +1,7 @@
 package isen.contact.views;
 
+import java.time.LocalDate;
+
 import isen.contact.entities.Person;
 import isen.contact.services.PersonListService;
 import isen.contact.util.PersonChangeListener;
@@ -27,7 +29,11 @@ public class HomeScreenController {
 	@FXML
 	private TextField phoneNumberField;
 	@FXML
-	private TextField birthDateField;
+	private TextField dayField;
+	@FXML
+	private TextField monthField;
+	@FXML
+	private TextField yearField;
 	
 	
 	@FXML
@@ -71,7 +77,7 @@ public class HomeScreenController {
 	
 	@FXML
 	private void showPersonDetails(Person person) {
-		if(person == null) formPane.setVisible(false);
+		if(person == null) formPane.setVisible(true);
 		else {
 			formPane.setVisible(true);
 			currentPerson = person;
@@ -82,7 +88,9 @@ public class HomeScreenController {
 			adressField.setText(currentPerson.getAddress());
 			emailField.setText(currentPerson.getEmailAddress());
 			phoneNumberField.setText(currentPerson.getPhoneNumber());
-			birthDateField.setText(currentPerson.getBirthDate().toString()); // a voir la tete que ca a
+			dayField.setText(Integer.toString(currentPerson.getBirthDate().getDayOfMonth())); // a voir la tete que ca a
+			monthField.setText(Integer.toString(currentPerson.getBirthDate().getMonthValue()));
+			yearField.setText(Integer.toString(currentPerson.getBirthDate().getYear()));
 			
 		}
 	}
@@ -90,6 +98,7 @@ public class HomeScreenController {
 	@FXML
 	private void resetView() {
 		showPersonDetails(null);
+		populateList();
 	}
 	
 	
@@ -99,9 +108,13 @@ public class HomeScreenController {
 	
     @FXML
     private void handleSaveButton() {
+
     	
     	currentPerson.setAddress(adressField.getText());
-    	//currentPerson.setBirthDate(birthDateField.getText()); //probleme ici
+    	
+    	LocalDate birthDate = LocalDate.of(Integer.valueOf(yearField.getText()), Integer.valueOf(monthField.getText()), Integer.valueOf(dayField.getText()));
+    	
+    	currentPerson.setBirthDate(birthDate); //probleme ici
     	currentPerson.setEmailAddress(emailField.getText());
     	currentPerson.setFirstName(firstNameField.getText());
     	currentPerson.setLastName(lastNameField.getText());
@@ -121,8 +134,15 @@ public class HomeScreenController {
     @FXML
     private void handleNewButton() {
     	
+
+		currentPerson = new Person(null, null, null, null, null, null, null);
+    	
     	currentPerson.setAddress(adressField.getText());
-    	//currentPerson.setBirthDate(birthDateField.getText()); //probleme ici
+    	
+    	LocalDate birthDate = LocalDate.of(Integer.valueOf(yearField.getText()), Integer.valueOf(monthField.getText()), Integer.valueOf(dayField.getText()));
+    	   
+    	
+    	currentPerson.setBirthDate(birthDate); //probleme ici
     	currentPerson.setEmailAddress(emailField.getText());
     	currentPerson.setFirstName(firstNameField.getText());
     	currentPerson.setLastName(lastNameField.getText());
@@ -139,6 +159,7 @@ public class HomeScreenController {
     @FXML
     private void handleDeleteButton() {
     	personListService.delPerson(currentPerson);
+    	resetView();
     }
 	
 	

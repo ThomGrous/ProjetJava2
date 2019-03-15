@@ -14,7 +14,7 @@ public class ViewService {
 	private static FXMLLoader getLoader(String id) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(ContactApp.class.getResource("view/" + id + ".fxml"));
+			loader.setLocation(ContactApp.class.getResource("views/" + id + ".fxml"));
 			loader.load();
 			return loader;
 		} catch (IOException e) {

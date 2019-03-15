@@ -23,7 +23,7 @@ public class Backup {
 	
 	public void exportDAO(List<Person> database) {
 		try{
-			OutputStream outputStream = new FileOutputStream("./src/main/resources/export-person.vcard"); //path output
+			OutputStream outputStream = new FileOutputStream("./src/main/resources/person.vcard"); //path output
 			Writer writer = new OutputStreamWriter(outputStream, "UTF-8");
 			BufferedWriter bufferedWriter = new BufferedWriter(writer);
 			
@@ -40,6 +40,7 @@ public class Backup {
 				bufferedWriter.write("Address;"+contact.getAddress()+"\n");
 				bufferedWriter.write("EmailAddress;"+contact.getEmailAddress()+"\n");
 				bufferedWriter.write("BirthDate;"+contact.getBirthDate()+"\n");
+				bufferedWriter.write("--\n");
 			}
 			bufferedWriter.write("END:VCARD"+"\n");
 			bufferedWriter.flush();
@@ -59,23 +60,10 @@ public class Backup {
 			BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 			String line;
 			Person contact = new Person(0, "", "", "", "", "", "", null);
-			Person vide = new Person(0, "", "", "", "", "", "", null);
 			while ((line = bufferedReader.readLine()) != null) {
-				System.out.println(line);
 				
 				switch(line.charAt(0)) {
 					case 'I': 
-						if(contact.getId()!=0) {
-									list.add(contact);
-									contact.setId(0);
-									contact.setLastName(vide.getLastName());
-									contact.setFirstName(vide.getFirstName());
-									contact.setNickName(vide.getNickName());
-									contact.setPhoneNumber(vide.getPhoneNumber());
-									contact.setAddress(vide.getAddress());
-									contact.setEmailAddress(vide.getEmailAddress());
-									contact.setBirthDate(vide.getBirthDate());
-									}
 							if(line.charAt(1) == 'D') {
 								String[] data = line.split(";");
 								contact.setId(Integer.parseInt(data[1]));
@@ -120,12 +108,17 @@ public class Backup {
 						break;
 					case 'B': 
 						if(line.charAt(1)=='i') {
-						System.out.println("je veux une date ici bande de shlag :" + line);
 						String[] data = line.split(";");
 						DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d");
 						LocalDate localDate = LocalDate.parse(data[1], formatter);
 						contact.setBirthDate(localDate);
 					}
+						break;
+					case '-':
+						if(contact.getId()!=0) {
+							list.add(contact);
+							contact = new Person(0, "", "", "", "", "", "", null);
+							}
 						break;
 					default: break;
 				}
